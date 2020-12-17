@@ -1,0 +1,5 @@
+cluster_logs/
+.snakemake/
+data/
+log/
+benchmarks/

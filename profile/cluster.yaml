@@ -1,0 +1,16 @@
+__resources__:
+  hostname: "*"
+#  gpu: 
+#    - "gpu"
+#    - "nvidia_gpu"
+
+__default__:
+  join: yes
+  output: log/
+  name: "default_job"
+  queue: "short.qc"
+  project: "palamara.prjc"
+  cwd: ""
+  pe: "shmem 1" 
+
+
