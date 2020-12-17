@@ -59,7 +59,7 @@ With these specific steps in place, you will be able to use `snakemake`  on the 
 
 ## Running Snakemake
 
-`snakemake -s test.smk all_rand_numbers all_hosts -j 4 --max-status-checks-per-second 0.01 --profile profile/`
+`snakemake -s test.smk all_rand_numbers all_hosts -j 4 --use-envmodules --max-status-checks-per-second 0.01 --profile profile/`
 
 or:
 

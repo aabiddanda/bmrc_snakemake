@@ -36,3 +36,18 @@ rule all_rand_numbers:
   input:
     expand("data/test_seed/seed{seed}.npz", seed=[24,42,144,360])
 
+
+rule all_data:
+  input:
+    rules.all_rand_numbers.input,
+    rules.all_hosts.input
+
+rule clean:
+  shell:
+    """
+    rm -rf data/
+    rm -rf benchmarks/
+    rm log/*.o*
+    """
+
+

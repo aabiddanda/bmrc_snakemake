@@ -3,6 +3,8 @@
 
 # exit on first error
 source ~/.bashrc
+source ~/.bashrc
+
 set -o errexit
 # module load Anaconda3/2020.02
 
