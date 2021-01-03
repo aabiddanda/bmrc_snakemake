@@ -1,1 +1,1 @@
-snakemake --use-envmodules --max-status-checks-per-second 1.0 --profile profile/ $*
+snakemake --max-status-checks-per-second 0.01 --profile profile/ $*

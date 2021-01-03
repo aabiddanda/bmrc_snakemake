@@ -2,10 +2,10 @@
 # properties = {properties}
 
 # exit on first error
-source ~/.bashrc
-source ~/.bashrc
-
 set -o errexit
-# module load Anaconda3/2020.02
+# Note: you have to source this 
+# twice sometimes for the environments to come thru (sleep is to )
+source ~/.bashrc
+sleep 2
 
 {exec_job}

@@ -3,3 +3,4 @@ cluster_logs/
 data/
 log/
 benchmarks/
+*.ipynb_checkpoints/
