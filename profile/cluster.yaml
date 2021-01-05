@@ -6,30 +6,19 @@ __resources__:
 
 __default__:
   join: yes
-  output: log/
-  error: log/
+  output: log/{rulename}.{jobid}
   name: "default_job"
-  queue: "short.qc"
-  project: "palamara.prjc"
-  cwd: ""
-  pe: "shmem 1"
-  
-__sim_chrom_hom_sap__:
-  join: yes
-  output: log/
-  error: log/
-  name: "sim_chrom"
-  queue: "short.qc@@short.hge"
-  project: "palamara.prjc"
-  cwd: ""
-  pe: "shmem 1" 
-  
-__conv_bcf2plink__:
-  join: yes
-  output: log/
-  error: log/
-  name: "bcf2plink"
   queue: "short.qc@@short.hge"
   project: "palamara.prjc"
   cwd: ""
   pe: "shmem 1"
+  h_rt: "1:00:00"
+
+conv_bcf2plink:
+  join: yes
+  output: log/{rulename}.{jobid}
+  name: "vcf2plink"
+  queue: "short.qc@@short.hge"
+  project: "palamara.prjc"
+  cwd: ""
+  pe: "shmem 2"

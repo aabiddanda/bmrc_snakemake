@@ -2,8 +2,6 @@
 
 """
 A simple workflow to submit jobs to the cluster
-inputs: Snakefile.smk (dummy input)
-output: hostname.txt
 """
 
 from snakemake.utils import min_version
@@ -14,7 +12,7 @@ onerror: print("finished with errors") # insert more useful code here, e.g. send
 
 rule get_hostname:
     output: "data/hostname_{n,\d+}.txt"
-    shell: "hostname > {output}"
+    shell: "set +o pipefail; hostname > {output}"
 
 rule all_hosts:
   input:
@@ -23,7 +21,7 @@ rule all_hosts:
 rule get_rand_numbers:
   """Testing out the application of rules in python."""
   output: "data/test_seed/seed{seed,\d+}.npz"
-  benchmark: "benchmarks/test_seed/{seed}.tsv"
+  benchmark: "benchmarks/test_seed/rand_numbers.seed{seed}.tsv"
   run:
     import numpy as np
     seed = np.int(wildcards.seed)

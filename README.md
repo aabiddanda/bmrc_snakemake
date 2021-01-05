@@ -29,13 +29,11 @@ cd /well/palamara/users/<name>/python/
 python -m venv ivybridge 
 source ivybridge/bin/activate
 
-# Note now that you should be in the ivybridge environment now
 pip3 install -r requirements
 deactivate 
 ```
 
-The rationale for using these python environments over something like `conda` is that they are much more lightweight in terms of their memory requirements and uptime to be activated.  However, `conda` is much more comprehensive and can support things like `R`, `julia`, and various other packages. If you are considering using a conda environment, it is probably better to use 
-
+The rationale for using these python environments over something like `conda` is that they are much more lightweight in terms of their memory requirements and uptime to be activated.  However, `conda` is much more comprehensive and can support things like `R`, `julia`, and various other packages. If you are considering using software that has some more hardcore dependencies then conda is probably the way to go.
 
 ### Choosing the right Python environment in `.bashrc`
 
@@ -53,7 +51,6 @@ if [[ ! $? == 0 ]]; then
     exit 1
 fi
 
-# Setting up my default python environment
 source /well/palamara/users/<name>/python/${CPU_ARCHITECTURE}/bin/activate
 ```
 
@@ -61,23 +58,29 @@ With these specific steps in place, you will be able to use `snakemake`  on the 
 
 ## Running Snakemake
 
-`snakemake -s snakefiles/test.smk all_data -j 4 --use-envmodules --max-status-checks-per-second 0.01 --profile profile/`
+`snakemake -s snakefiles/test.smk all_data -j 4 --max-status-checks-per-second 0.01 --profile profile/`
 
 or:
 
 `./run_snakemake.sh -s snakefiles/test.smk all_data -j2` 
 
-The `run_snakemake` command is effectively a short-hand for the above (with a default of 8 active jobs at a time)
-
+The `run_snakemake` command is effectively a short-hand for the above (with a default of 3 active jobs at a time)
 
 ### Bonus: Simulating Human Genetic Data
 
 ```
-./run_snakemake -s snakefiles/sim.smk run_sim_chr22 -j2
+./run_snakemake -s snakefiles/sim.smk run_sim_chr22 -j4
 ```
 
-This approach should simulate a quarter of chromosome22 and output two sets of bed/bim/fam files useable by `plink` and other software. Eventually - this is the kind of input that we will want for GWAS and other analyses of complex traits so it is useful to understand how to simulate similar data
+This approach should simulate a quarter of chromosome 22 and output sets of bed/bim/fam files useable by `plink` and other software. Eventually this is the kind of input that we will want for performing GWAS and other analyses of complex traits so it is useful to understand how to simulate data in this way.
+
+## Notes
+
+### 5/1/2020
+
+* In `cluster.yaml` you will notice that we only submit to jobs on the `short.qc@@short.hge` queue because these are the ones that have the `skylake` processors. This is primarily helpful because we freuently are running snakemake from `rescomp2` or `rescomp1` nodes, which have this processor. The offending libraries for this really are the `msprime` and `tskit` libraries that do not seem to play nicely with the `ivybridge` architecture.
+* I have added benchmarking directives to the simulation rules as well so that  
 
 ## Contact 
 
-For any questions regarding this pipeline, email: aabiddanda@gmail.com or alert via slack.
+For any questions regarding this pipeline, email: aabiddanda@gmail.com or alert via the PalamaraLab Slack.
