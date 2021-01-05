@@ -1,6 +1,6 @@
 ## BMRC Snakemake
 
-Getting setup with using snakemake on the BMRC cluster at Oxford.
+Getting setup with using snakemake on the BMRC cluster (`rescomp`) at Oxford. (DISCLAIMER:  this is primarily meant as a personal experiment and might not be well-suited for everyone)
 
 ### Setting up Python Environments
 
